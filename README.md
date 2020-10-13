@@ -1,2 +1,3 @@
 # useCountdown
-Created with CodeSandbox
+
+![img](./img/logo.png)
