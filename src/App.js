@@ -1,16 +1,23 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import React, { useState, useEffect } from "react";
 import "./styles.css";
 
 function useCountdown(timeout) {
   const [date, setDate] = useState(Date.now() + timeout);
   const currentDate = new Date().getTime();
-  const [time, setTime] = useState(new Date(date - currentDate));
+  const [{ isOut, time }, setState] = useState({
+    isOut: false,
+    time: new Date(date - currentDate)
+  });
 
   useEffect(() => {
     if (date > currentDate) {
       setTimeout(() => {
-        setTime(new Date(date - currentDate));
+        setState({ isOut: false, time: new Date(date - currentDate) });
       }, 1000);
+    } else {
+      setState((state) => ({ ...state, isOut: true }));
     }
   });
 
@@ -18,7 +25,7 @@ function useCountdown(timeout) {
     setDate(new Date().setMilliseconds(timeout));
   }, [timeout]);
 
-  return time;
+  return { time, isOut };
 }
 
 export default function App() {
