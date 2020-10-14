@@ -29,12 +29,13 @@ function useCountdown(timeout) {
 }
 
 export default function App() {
-  const time = useCountdown(900000);
+  const { time, isOut } = useCountdown(900000);
 
   return (
     <div className="App">
       <h1>Hello CodeSandbox</h1>
       <h2>{time.toISOString().substr(12, 8)}</h2>
+      <h2>{isOut.toString()}</h2>
     </div>
   );
 }
