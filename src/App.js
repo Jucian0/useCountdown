@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import "./styles.css";
 
 function useCountdown(timeout) {
-  const { current: date } = useRef(new Date().setMilliseconds(timeout));
-  const currentDate = new Date();
+  const [date, setDate] = useState(new Date().setMilliseconds(timeout));
+  const currentDate = new Date().getTime();
   const [time, setTime] = useState(new Date(date - currentDate));
 
   useEffect(() => {
@@ -13,6 +13,10 @@ function useCountdown(timeout) {
       }, 1000);
     }
   });
+
+  useEffect(() => {
+    setDate(new Date().setMilliseconds(timeout));
+  }, [timeout]);
 
   return time;
 }
