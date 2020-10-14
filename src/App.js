@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./styles.css";
 
 function useCountdown(timeout) {
-  const [date, setDate] = useState(new Date().setMilliseconds(timeout));
+  const [date, setDate] = useState(Date.now() + timeout);
   const currentDate = new Date().getTime();
   const [time, setTime] = useState(new Date(date - currentDate));
 
