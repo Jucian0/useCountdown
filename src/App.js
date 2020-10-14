@@ -16,7 +16,7 @@ function useCountdown(timeout) {
       setTimeout(() => {
         setState({ isOut: false, time: new Date(date - currentDate) });
       }, 1000);
-    } else {
+    } else if (!isOut) {
       setState((state) => ({ ...state, isOut: true }));
     }
   });
